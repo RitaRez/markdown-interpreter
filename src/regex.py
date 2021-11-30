@@ -1,11 +1,12 @@
-import re
+bold_token = r'\*\*(.*?)\*\*|\_\_(.*?)\_\_'
+bold_result = r'<b>\g<1>\g<2></b>'
 
-bold_token = r"\*\*(.*?)\*\*|\_\_(.*?)\_\_"
-bold_result = r"<b>\g<1>\g<2></b>"
+italic_token = r'\*(.*?)\*|\_(.*?)\_'
+italic_result = r'<i>\g<1>\g<2></i>'
 
-italic_token = r"\*(.*?)\*|\_(.*?)\_"
-italic_result = r"<i>\g<1>\g<2></i>"
-
-header_token = r"^(#+) (.*)$"
+header_token = r'^(#+) (.*)$'
 def header_result(type):
-  return r"<h" + re.escape(str(type)) + r">\g<2></h" + re.escape(str(type)) + r">"
+  return r'<h' + str(type) + r'>\g<2></h' + str(type) + r'>\n<hr>'
+
+link_token = r'\[(.*?)\] *\((.*?)\)'
+link_result = r'<a href="\g<2>">\g<1></a>'

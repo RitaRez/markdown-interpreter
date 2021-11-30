@@ -1,6 +1,6 @@
 # Markdown Interpreter
 
-A simple markdown interpreter made with _python_.
+A simple _markdown_ interpreter made with python, [Tkinter](https://docs.python.org/3/library/tkinter.html) and [tkhtmlview](https://pypi.org/project/tkhtmlview/)
 
 ## Installing
 

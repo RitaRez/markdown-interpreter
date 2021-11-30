@@ -20,7 +20,11 @@ def parse_header(text):
 
   return '\n'.join(lines)
 
+def parse_link(text):
+  return sub(link_token, link_result, text)
+
 def parse_text(markdown):
+  markdown = parse_link(markdown)
   markdown = parse_bold(markdown)
   markdown = parse_italic(markdown)
   markdown = parse_header(markdown)
