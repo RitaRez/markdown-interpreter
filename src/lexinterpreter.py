@@ -34,13 +34,13 @@ def parse_ordered_list(text):
     if res != None:
       lines.insert(i, '<ol>')
       i += 1
-      lines[i] = sub(begining_list_token, '<li>', lines[i]) + '</li>' # substituir por um elemento de lista
+      lines[i] = sub(begining_list_token, result_list, lines[i]) # substituir por um elemento de lista
       while True:
         i += 1
         if i >= len(lines): break        
         res = search(generic_list_token, lines[i])
         if res != None:
-          lines[i] = sub(generic_list_token, '<li>', lines[i]) + '</li>' # substituir por um elemento de lista
+          lines[i] = sub(generic_list_token, result_list, lines[i]) # substituir por um elemento de lista
         else:
           lines.insert(i, '</ol>')
           i += 1
@@ -59,13 +59,13 @@ def parse_unordered_list(text):
     if res != None:
       lines.insert(i, '<ul>')
       i += 1
-      lines[i] = sub(unorderd_list_token, '<li>', lines[i]) + '</li>' # substituir por um elemento de lista
+      lines[i] = sub(unorderd_list_token, result_list, lines[i]) # substituir por um elemento de lista
       while True:
         i += 1
         if i >= len(lines): break
         res = search(unorderd_list_token, lines[i])
         if res != None:
-          lines[i] = sub(unorderd_list_token, '<li>', lines[i]) + '</li>' # substituir por um elemento de lista
+          lines[i] = sub(unorderd_list_token, result_list, lines[i]) # substituir por um elemento de lista
         else:
           lines.insert(i, '</ul>')
           i += 1

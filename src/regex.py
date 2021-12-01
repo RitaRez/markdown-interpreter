@@ -11,6 +11,7 @@ def header_result(type):
 link_token = r'\[(.*?)\] *\((.*?)\)'
 link_result = r'<a href="\g<2>">\g<1></a>'
 
-begining_list_token = r'^(1. )'
-generic_list_token = r'^([0-9]. )'
-unorderd_list_token = r'^([-|*|+] )'
+begining_list_token = r'^1\. (.*)'
+generic_list_token = r'^[0-9]\. (.*)'
+unorderd_list_token = r'^[-*+] (.*)'
+result_list = r'<li>\g<1></li>'
