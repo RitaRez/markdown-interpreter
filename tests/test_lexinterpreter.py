@@ -35,10 +35,14 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_link("[test](https://test.com/)")
     self.assertEqual(html, "<a href=\"https://test.com/\">test</a>")
 
+  def parsing_links_should_not_parse_images(self):
+    html = parse_link("![alt description](https://test.com/image.jpg)")
+    self.assertEqual(html, "![alt description](https://test.com/image.jpg)")
+
   # -------------------------- TESTS FOR LINKS -------------------------- #
 
-  def test_parse_iamge_should_insert_html_tags(self):
-    html = parse_image("[alt description](https://test.com/image.jpg)")
+  def test_parse_image_should_insert_html_tags(self):
+    html = parse_image("![alt description](https://test.com/image.jpg)")
     self.assertEqual(html, "<img src=\"https://test.com/image.jpg\" alt=\"alt description\">")
 
   # -------------------------- TESTS FOR LISTS -------------------------- #

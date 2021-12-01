@@ -8,7 +8,7 @@ header_token = r'^(#+) (.*)$'
 def header_result(type):
   return r'<h' + str(type) + r'>\g<2></h' + str(type) + r'>\n<hr>'
 
-link_token = r'^|[^!]\[(.*?)\] *\((.*?)\)'
+link_token = r'[^!]?\[(.*?)\] *\((.*?)\)'
 link_result = r'<a href="\g<2>">\g<1></a>'
 
 image_token = r'!\[(.*?)\] *\((.*?)\)'
