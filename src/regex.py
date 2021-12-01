@@ -15,3 +15,6 @@ begining_list_token = r'^1\. (.*)'
 generic_list_token = r'^[0-9]\. (.*)'
 unorderd_list_token = r'^[-*+] (.*)'
 result_list = r'<li>\g<1></li>'
+
+code_token = r'\`\`\`(.*?)\`\`\`|\`\`(.*?)\`\`|\`(.*?)\`'
+code_result = r'<code style="background-color: #C2C2CF ; padding:2px; margin:16px; border-radius: 50%;" >\g<1>\g<2>\g<3></code>'

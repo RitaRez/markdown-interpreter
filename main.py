@@ -20,11 +20,13 @@ def display_html(html, file_path):
   root.mainloop()
 
 def main():
-  with open(sys.argv[1]) as f:
-    markdown = f.read()
-    html = parse_text(markdown)
-    # print(html)
-    display_html(html, sys.argv[1])
+  with open(sys.argv[1]) as input:
+    with open("template.html") as template_file:
+      template = template_file.read()
+      markdown = input.read()
+      html = template.replace('{{content}}', parse_text(markdown))
+      # print(html)
+      display_html(html, sys.argv[1])
 
 if __name__=='__main__':
   main()
