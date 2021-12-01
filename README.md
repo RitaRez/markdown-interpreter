@@ -9,3 +9,9 @@ A simple _markdown_ interpreter made with python, [Tkinter](https://docs.python.
 ## Running
 
 ```python3 main.py markdown-file.md```
+
+## Usage
+
+### Images
+
+![Tux the penguin](tux.png)

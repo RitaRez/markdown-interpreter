@@ -1,4 +1,4 @@
-from re import sub, search
+from re import sub, search, subn
 from src.regex import *
 
 def parse_bold(text):
@@ -78,8 +78,14 @@ def parse_unordered_list(text):
 def parse_code(text):
   return sub(code_token, code_result, text)
 
+def parse_images(text):
+  return sub(image_token, image_result, text)
+
+
+
 def parse_text(markdown):
   markdown = parse_link(markdown)
+  markdown = parse_images(markdown)
   markdown = parse_ordered_list(markdown)
   markdown = parse_unordered_list(markdown)
   markdown = parse_bold(markdown)
