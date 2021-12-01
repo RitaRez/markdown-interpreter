@@ -15,10 +15,7 @@ def parse_header(text):
     res = search(header_token, line)
     if res != None:
       header_type = len(res.group(1))
-      if(header_type <= 6):
-        lines[i] = sub(header_token, header_result(header_type), line)
-      else:
-        raise ValueError("Amount of headers is not standard")
+      lines[i] = sub(header_token, header_result(header_type), line)
 
   return '\n'.join(lines)
 
@@ -62,7 +59,9 @@ def parse_unordered_list(text):
       lines[i] = sub(unorderd_list_token, result_list, lines[i]) # substituir por um elemento de lista
       while True:
         i += 1
-        if i >= len(lines): break
+        if i >= len(lines):
+          lines.insert(i, '</ul>')
+          break
         res = search(unorderd_list_token, lines[i])
         if res != None:
           lines[i] = sub(unorderd_list_token, result_list, lines[i]) # substituir por um elemento de lista
