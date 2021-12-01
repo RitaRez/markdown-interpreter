@@ -75,6 +75,9 @@ def parse_unordered_list(text):
 
   return '\n'.join(lines)
 
+def parse_code(text):
+  return sub(code_token, code_result, text)
+
 def parse_text(markdown):
   markdown = parse_link(markdown)
   markdown = parse_ordered_list(markdown)
@@ -82,4 +85,5 @@ def parse_text(markdown):
   markdown = parse_bold(markdown)
   markdown = parse_italic(markdown)
   markdown = parse_header(markdown)
+  markdown = parse_code(markdown)
   return markdown

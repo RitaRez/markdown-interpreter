@@ -14,3 +14,6 @@ link_result = r'<a href="\g<2>">\g<1></a>'
 begining_list_token = r'^(1. )'
 generic_list_token = r'^([0-9]. )'
 unorderd_list_token = r'^([-|*|+] )'
+
+code_token = r'\`\`\`(.*?)\`\`\`|\`\`(.*?)\`\`|\`(.*?)\`'
+code_result = r'<code style="background-color: #C2C2CF ; padding:2px; border-radius: 6px;" >\g<1>\g<2>\g<3></code>'
