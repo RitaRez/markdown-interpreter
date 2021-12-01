@@ -17,6 +17,8 @@ def parse_header(text):
       header_type = len(res.group(1))
       if(header_type <= 6):
         lines[i] = sub(header_token, header_result(header_type), line)
+      else:
+        raise ValueError("Amount of headers is not standard")
 
   return '\n'.join(lines)
 
