@@ -4,7 +4,7 @@ A simple _markdown_ interpreter made with python, [Tkinter](https://docs.python.
 
 ## Installing
 
-```pip3 install -r requirements.txt -f```
+```pip3 install -r requirements.txt```
 
 ## Running
 

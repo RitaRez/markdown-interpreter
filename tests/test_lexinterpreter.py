@@ -41,9 +41,9 @@ class TestLexInterpreter(unittest.TestCase):
 
   def test_parse_code1_should_insert_html_tags(self):
     html = parse_code("`Code here`")
-    self.assertEqual(html, '<code style="background-color: #C2C2CF ; padding:2px; border-radius: 6px;" >Code here</code>')
+    self.assertEqual(html, '<code style="background-color: #E3E6E8;" >Code here</code>')
 
   def test_parse_code3_should_insert_html_tags(self):
     html = parse_code("```Code here```")
-    self.assertEqual(html, '<code style="background-color: #C2C2CF ; padding:2px; border-radius: 6px;" >Code here</code>')
+    self.assertEqual(html, '<code style="background-color: #E3E6E8;" >Code here</code>')
 
