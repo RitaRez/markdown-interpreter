@@ -15,6 +15,18 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_link("[test](https://test.com/)")
     self.assertEqual(html, "<a href=\"https://test.com/\">test</a>")
 
+  def test_parse_ordered_list_should_insert_html_tags(self):
+    html = parse_ordered_list("1. Rita\n2. Pedro\n")
+    self.assertEqual(html, "<ol>\n<li>Rita</li>\n<li>Pedro</li>\n</ol>\n")
+
+  def test_parse_unordered_list_should_insert_html_tags(self):
+    html = parse_unordered_list("- Luiz\n- Alexis\n")
+    self.assertEqual(html, "<ul>\n<li>Luiz</li>\n<li>Alexis</li>\n</ul>\n")
+    html = parse_unordered_list("+ Luiz\n+ Alexis\n")
+    self.assertEqual(html, "<ul>\n<li>Luiz</li>\n<li>Alexis</li>\n</ul>\n")
+    html = parse_unordered_list("* Luiz\n* Alexis\n")
+    self.assertEqual(html, "<ul>\n<li>Luiz</li>\n<li>Alexis</li>\n</ul>\n")
+
   def test_parse_header1_should_insert_html_tags(self):
     html = parse_header("# Header 1")
     self.assertEqual(html, "<h1>Header 1</h1>\n<hr>")
@@ -26,3 +38,4 @@ class TestLexInterpreter(unittest.TestCase):
   def test_parse_header7_should_fail_to_insert_html_tags(self):
     with self.assertRaises(ValueError):
       html = parse_header("####### Header 7")
+

@@ -23,7 +23,7 @@ def main():
   with open(sys.argv[1]) as f:
     markdown = f.read()
     html = parse_text(markdown)
-    print(html)
+    # print(html)
     display_html(html, sys.argv[1])
 
 if __name__=='__main__':
