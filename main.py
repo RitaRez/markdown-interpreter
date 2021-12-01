@@ -9,6 +9,7 @@ from  src.lexinterpreter import parse_text
 
 def setup_window(name):
   window = tk.Tk()
+  window.geometry("900x"+str(window.winfo_screenheight()))
   window.configure(background='white')
   window.title(name)
   return window
