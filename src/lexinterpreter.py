@@ -95,11 +95,21 @@ def parse_paragraph(text):
 def parse_strike(text):
   return sub(strike_token, strike_result, text)
 
-def parse_text(markdown):
+def parse_blockquote(text):
+  lines = text.split('\n')
 
+  for i in range(len(lines)):
+    line = lines[i]
+    lines[i] = sub(blockquote_token, blockquote_result, line)
+
+  return '\n'.join(lines)
+
+def parse_text(markdown):
+  
   print(markdown)
 
   markdown = parse_header(markdown)
+  markdown = parse_blockquote(markdown)
   markdown = parse_unordered_list(markdown)
   markdown = parse_ordered_list(markdown)
   markdown = parse_paragraph(markdown)

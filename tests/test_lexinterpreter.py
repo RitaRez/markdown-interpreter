@@ -173,6 +173,15 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_code("```Code here```")
     self.assertEqual(html, '<code style="background-color: #E3E6E8;" >Code here</code>')
 
+  # -------------------------- TESTS FOR BLOCKQUOTES -------------------------- #
+
+  def test_parse_blockquote_should_insert_html_tags(self):
+    html = parse_blockquote("> Meu quote")
+    self.assertEqual(html, '<div style="width: 40%; height: 25px; background-color: gray"><div style="margin-left: 1%; width: 99%; height: 25px; background-color: #d0d7de;"><div style="padding-left: 1%; padding-top: 0.8%;" >Meu quote</div></div></div>')
+
+  def test_parse_blockquote_should_fail(self):
+    html = parse_blockquote(">Meu quote")
+    self.assertEqual(html, ">Meu quote")
 
 # -------------------------- TESTS FOR BREAKLINES AND PARAGRAPHS -------------------------- #
 
