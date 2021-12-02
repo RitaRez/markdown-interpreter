@@ -80,13 +80,30 @@ def parse_code(text):
 def parse_image(text):
   return sub(image_token, image_result, text)
 
+def parse_breakline(text):
+  return sub(breakline_token, breakline_result, text)
+
+def parse_paragraph(text):
+  lines = text.split('\n')
+
+  for i in range(len(lines)):
+    line = lines[i]
+    lines[i] = sub(paragraph_token, paragraph_result, line)
+
+  return '\n'.join(lines)
+
 def parse_text(markdown):
+
+  print(markdown)
+
+  markdown = parse_header(markdown)
+  markdown = parse_unordered_list(markdown)
+  markdown = parse_ordered_list(markdown)
+  markdown = parse_paragraph(markdown)
   markdown = parse_link(markdown)
   markdown = parse_image(markdown)
-  markdown = parse_ordered_list(markdown)
-  markdown = parse_unordered_list(markdown)
   markdown = parse_bold(markdown)
   markdown = parse_italic(markdown)
-  markdown = parse_header(markdown)
   markdown = parse_code(markdown)
+  markdown = parse_breakline(markdown)
   return markdown
