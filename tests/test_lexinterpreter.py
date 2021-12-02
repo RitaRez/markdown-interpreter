@@ -29,6 +29,18 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_italic("Here is a *italic\n* word")
     self.assertEqual(html, "Here is a *italic\n* word")
 
+   # -------------------------- TESTS FOR BOLD AND ITALIC WORDS -------------------------- #
+
+  def test_parse_italic_and_bold_should_insert_html_tags(self):
+    html = parse_bold("Here is an ***bold and italic*** word")
+    html = parse_italic(html)
+    self.assertEqual(html, "Here is an <b><i>bold and italic</b></i> word")
+
+  def test_should_fail_to_parse_italic_bold_if_text_has_a_line_break(self):
+    html = parse_bold("Here is a ***bold and italic\n*** word")
+    html = parse_italic(html)
+    self.assertEqual(html, "Here is a <i>*</i>bold and italic\n<i>*</i> word")
+
   # -------------------------- TESTS FOR LINKS -------------------------- #
 
   def test_parse_link_should_insert_html_tags(self):
