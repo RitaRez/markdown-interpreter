@@ -92,6 +92,9 @@ def parse_paragraph(text):
 
   return '\n'.join(lines)
 
+def parse_strike(text):
+  return sub(strike_token, strike_result, text)
+
 def parse_text(markdown):
 
   print(markdown)
@@ -104,6 +107,7 @@ def parse_text(markdown):
   markdown = parse_image(markdown)
   markdown = parse_bold(markdown)
   markdown = parse_italic(markdown)
+  markdown = parse_strike(markdown)
   markdown = parse_code(markdown)
   markdown = parse_breakline(markdown)
   return markdown

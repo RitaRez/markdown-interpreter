@@ -13,6 +13,7 @@
 **Texto em negrito**
 ***Texto em italico e negrito***
 \* ignore italic \*
+~~ mistake ~~
 
 # Header com *italico*
 
