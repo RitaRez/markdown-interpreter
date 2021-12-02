@@ -27,3 +27,6 @@ result_list = r'<li>\g<1></li>'
 
 code_token = r'(```((.|\n)*?)```)|(``((.|\n)*?)``)|(`((.|\n)*?)`)'
 code_result = r'<code style="background-color: #E3E6E8;" >\g<2>\g<5>\g<8></code>'
+
+strike_token = r'~~(.+?)~~'
+strike_result = r'<s>\g<1></s>'

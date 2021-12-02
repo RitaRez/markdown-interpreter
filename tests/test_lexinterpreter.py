@@ -29,6 +29,16 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_italic("Here is a *italic\n* word")
     self.assertEqual(html, "Here is a *italic\n* word")
 
+  # -------------------------- TESTS FOR STRIKED WORDS -------------------------- #
+
+  def test_parse_strike_should_insert_html_tags(self):
+    html = parse_strike("~~This is a mistake~~")
+    self.assertEqual(html, "<s>This is a mistake</s>")
+
+  def test_parse_strike_should_fail_because_of_line_break(self):
+    html = parse_strike("~~This is a mistake \n~~")
+    self.assertEqual(html, "~~This is a mistake \n~~")
+
    # -------------------------- TESTS FOR BOLD AND ITALIC WORDS -------------------------- #
 
   def test_parse_italic_and_bold_should_insert_html_tags(self):
@@ -40,6 +50,14 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_bold("Here is a ***bold and italic\n*** word")
     html = parse_italic(html)
     self.assertEqual(html, "Here is a <i>*</i>bold and italic\n<i>*</i> word")
+
+  # -------------------------- TESTS FOR STRIKED ITALIC AND BOLD WORDS -------------------------- #
+
+  def test_parse_strike_italic_bold_should_insert_html_tags(self):
+    html = parse_strike("~~***This is a mistake***~~")
+    html = parse_bold(html)
+    html = parse_italic(html)
+    self.assertEqual(html, "<s><b><i>This is a mistake</b></i></s>")
 
   # -------------------------- TESTS FOR LINKS -------------------------- #
 
@@ -56,7 +74,7 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_bold(html)
     self.assertEqual(html, "<a href=\"https://test.com/\"><b>test</b></a>")
 
-    html = parse_bold("[**test**](https://test.com/)")
+    html = parse_bold("[__test__](https://test.com/)")
     html = parse_link(html)
     self.assertEqual(html, "<a href=\"https://test.com/\"><b>test</b></a>")
 
@@ -65,9 +83,14 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_italic(html)
     self.assertEqual(html, "<a href=\"https://test.com/\"><i>test</i></a>")
 
-    html = parse_italic("[*test*](https://test.com/)")
+    html = parse_italic("[_test_](https://test.com/)")
     html = parse_link(html)
     self.assertEqual(html, "<a href=\"https://test.com/\"><i>test</i></a>")
+
+  def test_should_allow_striked_links(self):
+    html = parse_strike("[~~test~~](https://test.com/)")
+    html = parse_link(html)
+    self.assertEqual(html, "<a href=\"https://test.com/\"><s>test</s></a>")
 
   def test_should_allow_list_of_links(self):
     html = "* [link 1](https://test.com/1)\n* [link 2](https://test.com/2)"
