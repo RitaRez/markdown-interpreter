@@ -130,11 +130,11 @@ class TestLexInterpreter(unittest.TestCase):
 
   def test_parse_header1_should_insert_html_tags(self):
     html = parse_header("# Header 1")
-    self.assertEqual(html, "<h1>Header 1</h1>\n<hr>")
+    self.assertEqual(html, "<h1>Header 1</h1>")
 
   def test_parse_header6_should_insert_html_tags(self):
     html = parse_header("###### Header 6")
-    self.assertEqual(html, "<h6>Header 6</h6>\n<hr>")
+    self.assertEqual(html, "<h6>Header 6</h6>")
 
   def test_parse_header7_should_fail_to_insert_html_tags(self):
     html = parse_header("####### Header 7")
@@ -150,3 +150,21 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_code("```Code here```")
     self.assertEqual(html, '<code style="background-color: #E3E6E8;" >Code here</code>')
 
+
+# -------------------------- TESTS FOR BREAKLINES AND PARAGRAPHS -------------------------- #
+
+  def test_parse_breakline_should_insert_br_html_tag(self):
+    html = parse_breakline("Just some nice text\r\nAnother line with text\r\nYet another line")
+    self.assertEqual(html, "Just some nice text\r\n<br>\r\nAnother line with text\r\n<br>\r\nYet another line")
+
+  def test_parse_of_paragraphs_should_insert_p_html_tag(self):
+    html = parse_paragraph("Just some nice text")
+    self.assertEqual(html, "<p>Just some nice text</p>")
+
+  def test_parse_of_paragraphs_should_insert_two_p_html_tag(self):
+    html = parse_paragraph("Just some nice text\nAnother nice text")
+    self.assertEqual(html, "<p>Just some nice text</p>\n<p>Another nice text</p>")
+
+  def test_parse_of_paragraphs_should_not_accept_empty_paragraphs(self):
+    html = parse_paragraph("Just some nice text\n\nAnother nice text")
+    self.assertEqual(html, "<p>Just some nice text</p>\n\n<p>Another nice text</p>")

@@ -6,13 +6,19 @@ italic_result = r'<i>\g<1>\g<2></i>'
 
 header_token = r'^(#{1,6}) (.*)$'
 def header_result(type):
-  return r'<h' + str(type) + r'>\g<2></h' + str(type) + r'>\n<hr>'
+  return r'<h' + str(type) + r'>\g<2></h' + str(type) + r'>'
 
 link_token = r'(^|[^!])\[(.*?)\] *\((.*?)\)'
 link_result = r'\g<1><a href="\g<3>">\g<2></a>'
 
 image_token = r'!\[(.*?)\] *\((.*?)\)'
 image_result = r'<img src="\g<2>" alt="\g<1>">'
+
+breakline_token = r'(\r\n)|(\r)|(\n)'
+breakline_result = r'\g<1>\g<2>\g<3><br>\g<1>\g<2>\g<3>'
+
+paragraph_token = r'^( *(?!(<h[1-6]>)|(<ul>)|(<ol>)|(<li>)).+?)$'
+paragraph_result = r'<p>\g<1></p>'
 
 begining_list_token = r'^1\. (.*)'
 generic_list_token = r'^[0-9]\. (.*)'

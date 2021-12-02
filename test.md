@@ -9,9 +9,10 @@
 9. teste
 
 
-*Texto em italico* \n
-**Texto em negrito** \n
-***Texto em italico e negrito*** \n
+*Texto em italico*
+**Texto em negrito**
+***Texto em italico e negrito***
+\* ignore italic \*
 
 # Header com *italico*
 
