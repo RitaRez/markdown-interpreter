@@ -171,6 +171,10 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_alternate_header("Heading level 2\n---------------")
     self.assertEqual(html,"<h2>Heading level 2</h2>")
 
+  def test_alternate_header_level2_should_fail_to_insert_html_tags(self):
+    html = parse_alternate_header("Heading level 2\n---------------1")
+    self.assertEqual(html,"Heading level 2\n---------------1")
+
   # -------------------------- TESTS FOR CODE BITS -------------------------- #
 
   def test_parse_code_single_backsticks_should_insert_html_tags(self):
@@ -194,6 +198,21 @@ class TestLexInterpreter(unittest.TestCase):
   def test_parse_blockquote_should_fail(self):
     html = parse_blockquote(">Meu quote")
     self.assertEqual(html, ">Meu quote")
+
+  def test_parse_should_allow_bold_and_striked_words_in_blockquotes(self):
+    html = parse_blockquote("> **Meu** ~~quote~~")
+    html = parse_bold(html)
+    html = parse_strike(html)
+    self.assertEqual(html, '<div style="width: 40%; height: 25px; background-color: gray"><div style="margin-left: 1%; width: 99%; height: 25px; background-color: #d0d7de;"><div style="padding-left: 1%; padding-top: 0.8%;" ><b>Meu</b> <s>quote</s></div></div></div>')
+
+  def test_parse_should_allow_italic_links_in_blockquotes(self):
+    html = parse_blockquote("> [*test*](https://test.com/)")
+    html = parse_link(html)
+    html = parse_italic(html)
+
+    self.assertEqual(html, '<div style="width: 40%; height: 25px; background-color: gray"><div style="margin-left: 1%; width: 99%; height: 25px; background-color: #d0d7de;"><div style="padding-left: 1%; padding-top: 0.8%;" ><a href=\"https://test.com/\"><i>test</i></a></div></div></div>')
+
+  
 
 # -------------------------- TESTS FOR BREAKLINES AND PARAGRAPHS -------------------------- #
 
