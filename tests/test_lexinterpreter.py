@@ -149,6 +149,15 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_unordered_list("* Luiz\n* Alexis\n")
     self.assertEqual(html, "<ul>\n<li>Luiz</li>\n<li>Alexis</li>\n</ul>\n")
 
+  def test_parse_nested_unordered_list(self):
+    html = parse_unordered_list("* Luiz\n* Alexis\n    * Rita\n* Pedro")
+    self.assertEqual(html, "<ul>\n<li>Luiz</li>\n<li>Alexis\n<ul>\n<li>Rita</li>\n</ul>\n<li>Pedro</li></ul>\n")
+
+  def test_parse_two_nested_unordered_list(self):
+    html = parse_unordered_list("* Luiz\n    * Alexis\n    * Rita\n* Pedro\n    * Indented Item\n* Last Item")
+    self.assertEqual(html, "<ul>\n<li>Luiz\n<ul>\n<li>Alexis</li>\n<li>Rita</li>\n</ul>\n<li>Pedro\n<ul>\n<li>Indented Item</li>\n</ul>\n<li>Last Item</li>\n</ul>\n")
+
+
   # -------------------------- TESTS FOR HEADERS -------------------------- #
 
   def test_parse_header1_should_insert_html_tags(self):
