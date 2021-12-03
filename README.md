@@ -5,9 +5,13 @@ A simple _markdown_ interpreter made with python, [Tkinter](https://docs.python.
 Contributors
 ------------
 Alexis Mariz
+
 Luiz Philippe Pereira Amaral
+
 Pedro Henrique Andrade
+
 Rita Rezende Borges de Lima
+
 
 Installing
 -------------
