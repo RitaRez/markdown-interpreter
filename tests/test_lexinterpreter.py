@@ -163,13 +163,25 @@ class TestLexInterpreter(unittest.TestCase):
     html = parse_header("####### Header 7")
     self.assertEqual(html, "####### Header 7")
 
+  def test_alternate_header_level1_should_insert_html_tags(self):
+    html = parse_alternate_header("Heading level 1\n===============")
+    self.assertEqual(html,"<h1>Heading level 1</h1>")
+
+  def test_alternate_header_level2_should_insert_html_tags(self):
+    html = parse_alternate_header("Heading level 2\n---------------")
+    self.assertEqual(html,"<h2>Heading level 2</h2>")
+
   # -------------------------- TESTS FOR CODE BITS -------------------------- #
 
-  def test_parse_code1_should_insert_html_tags(self):
+  def test_parse_code_single_backsticks_should_insert_html_tags(self):
     html = parse_code("`Code here`")
     self.assertEqual(html, '<code style="background-color: #E3E6E8;" >Code here</code>')
 
-  def test_parse_code3_should_insert_html_tags(self):
+  def test_parse_code_double_backsticks_should_insert_html_tags(self):
+    html = parse_code("``Code here``")
+    self.assertEqual(html, '<code style="background-color: #E3E6E8;" >Code here</code>')
+
+  def test_parse_code_triple_backsticks_should_insert_html_tags(self):
     html = parse_code("```Code here```")
     self.assertEqual(html, '<code style="background-color: #E3E6E8;" >Code here</code>')
 
@@ -200,3 +212,4 @@ class TestLexInterpreter(unittest.TestCase):
   def test_parse_of_paragraphs_should_not_accept_empty_paragraphs(self):
     html = parse_paragraph("Just some nice text\n\nAnother nice text")
     self.assertEqual(html, "<p>Just some nice text</p>\n\n<p>Another nice text</p>")
+  

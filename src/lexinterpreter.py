@@ -104,11 +104,30 @@ def parse_blockquote(text):
 
   return '\n'.join(lines)
 
+def parse_alternate_header(text):
+  lines = text.split('\n')
+  index_list = []
+  for i in range(len(lines)):
+    if search(alternate_header_token_level1, lines[i]) is not None:
+      lines[i-1] = sub(alternate_header_token_level1,"<h1>" + lines[i-1] + "</h1>" , lines[i])
+      index_list.insert(0,i)
+  
+  for i in range(len(lines)):
+    if search(alternate_header_token_level2, lines[i]) is not None:
+      lines[i-1] = sub(alternate_header_token_level2,"<h2>" + lines[i-1] + "</h2>" , lines[i])
+      index_list.insert(0,i)
+
+  for i in index_list:
+    lines.pop(i)
+
+  return '\n'.join(lines)
+
 def parse_text(markdown):
   
   print(markdown)
 
   markdown = parse_header(markdown)
+  markdown = parse_alternate_header(markdown)
   markdown = parse_blockquote(markdown)
   markdown = parse_unordered_list(markdown)
   markdown = parse_ordered_list(markdown)
