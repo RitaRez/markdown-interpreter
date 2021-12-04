@@ -14,6 +14,11 @@ def setup_window(name):
   window.title(name)
   return window
 
+def save_html(html, output_file):
+  with open(output_file, 'w') as output:
+    output.write(html)
+    output.close()
+
 def display_html(html, file_path):
   root = setup_window(file_path.split('/')[-1])
   my_label = HTMLLabel(root, html=html)
@@ -21,13 +26,21 @@ def display_html(html, file_path):
   root.mainloop()
 
 def main():
+  if len(sys.argv) < 2:
+    print("Too few arguments")
+    return 
+
   with open(sys.argv[1]) as input:
     with open("template.html") as template_file:
       template = template_file.read()
       markdown = input.read()
-      html = template.replace('{{content}}', parse_text(markdown))
-      # print(html)
-      display_html(html, sys.argv[1])
+      input.close()
+      html = template.replace('{{content}}', parse_text(markdown)).replace('{{title}}', sys.argv[1].split('/')[-1])
+
+      if len(sys.argv) > 2:
+        save_html(html, sys.argv[2])
+      else:
+        display_html(html, sys.argv[1])
 
 if __name__=='__main__':
   main()
