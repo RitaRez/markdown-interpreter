@@ -138,12 +138,10 @@ def parse_table(text):
 def build_table(lines):
   i = 0  
   table = ["<table>"]
-  amount_pipes = len(lines[0].split('|'))
+  amount_pipes = len(lines[0].split('|')) - 2
 
   if lines[1].startswith('|-'):
-    elements = lines[0].split('|')
-    del elements[0]
-    del elements[-1]
+    elements = lines[0].split('|')[1:-1]
     row = '<tr>'
     for el in elements:
       row += '<th>' + el + '</th>'
@@ -157,15 +155,14 @@ def build_table(lines):
       return ''.join(table), i 
 
     else:       
-      elements = lines[i].split('|')
-      del elements[0]
-      del elements[-1]
+      elements = lines[i].split('|')[1:-1]
       while len(elements) < amount_pipes:
         elements.append('')
       
       i += 1
       row = '<tr>'
-      for el in elements:
+      for j in range(amount_pipes):
+        el = elements[j]
         row += '<td>' + el + '</td>'
       row += '</tr>'
       table.append(row)
