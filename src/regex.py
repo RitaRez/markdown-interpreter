@@ -34,3 +34,6 @@ strike_result = r'<s>\g<1></s>'
 blockquote_token = r'^> (.+)'
 blockquote_result = r'<div style="width: 40%; height: 25px; background-color: gray"><div style="margin-left: 1%; width: 99%; height: 25px; background-color: #d0d7de;"><div style="padding-left: 1%; padding-top: 0.8%;" >\g<1></div></div></div>'
 
+alternate_header_token_level1 = r'(^\=\=*$)'
+
+alternate_header_token_level2 = r'(^\-\-*$)'
