@@ -26,7 +26,7 @@ def main():
       template = template_file.read()
       markdown = input.read()
       html = template.replace('{{content}}', parse_text(markdown))
-      print(html)
+      # print(html)
       display_html(html, sys.argv[1])
 
 if __name__=='__main__':

@@ -3,10 +3,11 @@
 
 1. rita 
 2. Pedro 
-8. luiz
-4. felipe
-1. alexis
-9. teste
+
+| Header | Another header | Yet another header |
+|--- |--- |--- |
+| row 1 | column 2 | column 3 |
+| row 2 | row 2 column 2 | row 2 column 3 |
 
 
 *Texto em italico*
@@ -24,9 +25,4 @@
 - icd
 - algebra a
 - testes de software
-- pedro
-- algoritmo 2
-- testes de software
-- luiz
-- sistemas operacionais
 

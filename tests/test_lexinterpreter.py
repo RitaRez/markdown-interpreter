@@ -200,3 +200,9 @@ class TestLexInterpreter(unittest.TestCase):
   def test_parse_of_paragraphs_should_not_accept_empty_paragraphs(self):
     html = parse_paragraph("Just some nice text\n\nAnother nice text")
     self.assertEqual(html, "<p>Just some nice text</p>\n\n<p>Another nice text</p>")
+
+# -------------------------- TESTS FOR TABLES -------------------------- #
+
+def test_parse_table_without_header_should_insert_in_html(self):
+    html = parse_breakline("| el1 | el2 |\n| el3 | el4 |")
+    self.assertEqual(html, "<table><tr><td> el1 </td><td> el2 </td></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
