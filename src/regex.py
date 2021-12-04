@@ -17,7 +17,7 @@ image_result = r'<img src="\g<2>" alt="\g<1>">'
 breakline_token = r'(\r\n)|(\r)|(\n)'
 breakline_result = r'\g<1>\g<2>\g<3><br>\g<1>\g<2>\g<3>'
 
-paragraph_token = r'^( *(?!(<h[1-6]>)|(<ul>)|(<ol>)|(<li>)).+?)$'
+paragraph_token = r'^( *(?!(<h[1-6]>)|(</?ul>)|(</?ol>)|(</?li>)|(</?tr>)|(</?table>)|(</?td>)|(</?th>)).+?)$'
 paragraph_result = r'<p>\g<1></p>'
 
 begining_list_token = r'^1\. (.*)'

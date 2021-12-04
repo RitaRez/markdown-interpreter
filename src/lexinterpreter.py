@@ -1,4 +1,4 @@
-from re import sub, search, subn
+from re import sub, search, subn, match
 from src.regex import *
 
 def parse_bold(text):
@@ -122,15 +122,63 @@ def parse_alternate_header(text):
 
   return '\n'.join(lines)
 
+def parse_table(text):
+
+  lines = text.split('\n')
+  i = 0
+  
+  while i < len(lines):
+    if match(r'^\|(.+?\|)+', lines[i]):
+      table, table_size = build_table(lines[i:])
+      lines[i:i+table_size] = []
+      lines.insert(i, table)
+    i += 1
+  return '\n'.join(lines)
+
+def build_table(lines):
+  i = 0  
+  table = ["<table>"]
+  amount_pipes = len(lines[0].split('|')) - 2
+
+  if lines[1].startswith('|-'):
+    elements = lines[0].split('|')[1:-1]
+    row = '<tr>'
+    for el in elements:
+      row += '<th>' + el + '</th>'
+    row += '</tr>'
+    table.append(row)
+    i += 2
+
+  while i < len(lines):
+    if not lines[i].startswith('|'):
+      table.append('</table>')
+      return ''.join(table), i 
+
+    else:       
+      elements = lines[i].split('|')[1:-1]
+      while len(elements) < amount_pipes:
+        elements.append('')
+      
+      i += 1
+      row = '<tr>'
+      for j in range(amount_pipes):
+        el = elements[j]
+        row += '<td>' + el + '</td>'
+      row += '</tr>'
+      table.append(row)
+
+  table.append('</table>')
+  return ''.join(table), i
+
+
 def parse_text(markdown):
   
-  print(markdown)
-
   markdown = parse_header(markdown)
   markdown = parse_alternate_header(markdown)
   markdown = parse_blockquote(markdown)
   markdown = parse_unordered_list(markdown)
   markdown = parse_ordered_list(markdown)
+  markdown = parse_table(markdown)
   markdown = parse_paragraph(markdown)
   markdown = parse_link(markdown)
   markdown = parse_image(markdown)
@@ -139,4 +187,5 @@ def parse_text(markdown):
   markdown = parse_strike(markdown)
   markdown = parse_code(markdown)
   markdown = parse_breakline(markdown)
+
   return markdown

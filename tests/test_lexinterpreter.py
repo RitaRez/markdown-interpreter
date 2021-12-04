@@ -231,4 +231,45 @@ class TestLexInterpreter(unittest.TestCase):
   def test_parse_of_paragraphs_should_not_accept_empty_paragraphs(self):
     html = parse_paragraph("Just some nice text\n\nAnother nice text")
     self.assertEqual(html, "<p>Just some nice text</p>\n\n<p>Another nice text</p>")
+
+# -------------------------- TESTS FOR TABLES -------------------------- #
+
+  def test_parse_table_without_header_should_insert_in_html(self):
+    html = parse_table("| el1 | el2 |\n| el3 | el4 |")
+    self.assertEqual(html, "<table><tr><td> el1 </td><td> el2 </td></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
+
+  def test_parse_table_with_header_should_insert_in_html(self):
+    html = parse_table("| el1 | el2 |\n|--|--|\n| el3 | el4 |")
+    self.assertEqual(html, "<table><tr><th> el1 </th><th> el2 </th></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
+
+  def test_parse_table_with_missing_element_should_insert_empty_cell_in_html(self):
+    html = parse_table("| el1 | el2 |\n|--|--|\n| el3 |")
+    self.assertEqual(html, "<table><tr><th> el1 </th><th> el2 </th></tr><tr><td> el3 </td><td></td></tr></table>")
+
+  def test_parse_table_with_extra_element_should_not_appear_in_html(self):
+    html = parse_table("| el1 | el2 |\n|--|--|\n| el3 | el4 | el5 |")
+    self.assertEqual(html, "<table><tr><th> el1 </th><th> el2 </th></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
+
+  def test_parse_two_tables_both_should_appear_in_html(self):
+    html = parse_table("| el1 | el2 |\n| el3 | el4 |\nLorem Ipsum\n| el1 | el2 |\n| el3 | el4 |")
+    self.assertEqual(html, "<table><tr><td> el1 </td><td> el2 </td></tr><tr><td> el3 </td><td> el4 </td></tr></table>\nLorem Ipsum\n<table><tr><td> el1 </td><td> el2 </td></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
   
+  def test_parse_table_with_italic_text_should_insert_in_html(self):
+    html = parse_table("| *el1* | *el2* |\n|--|--|\n| el3 | el4 |")
+    html = parse_italic(html)
+    self.assertEqual(html, "<table><tr><th> <i>el1</i> </th><th> <i>el2</i> </th></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
+
+  def test_parse_table_with_bold_text_should_insert_in_html(self):
+    html = parse_table("| **el1** | **el2** |\n|--|--|\n| el3 | el4 |")
+    html = parse_bold(html)
+    self.assertEqual(html, "<table><tr><th> <b>el1</b> </th><th> <b>el2</b> </th></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
+
+  def test_parse_table_with_striked_text_should_insert_in_html(self):
+    html = parse_table("| ~~el1~~ | ~~el2~~ |\n|--|--|\n| el3 | el4 |")
+    html = parse_strike(html)
+    self.assertEqual(html, "<table><tr><th> <s>el1</s> </th><th> <s>el2</s> </th></tr><tr><td> el3 </td><td> el4 </td></tr></table>")
+
+  def test_parse_table_with_links_text_should_insert_in_html(self):
+    html = parse_table("| el1 | el2 |\n|--|--|\n| [el3](link.com) | el4 |")
+    html = parse_link(html)
+    self.assertEqual(html, "<table><tr><th> el1 </th><th> el2 </th></tr><tr><td> <a href=\"link.com\">el3</a> </td><td> el4 </td></tr></table>")
