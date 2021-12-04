@@ -26,15 +26,16 @@ def display_html(html, file_path):
   root.mainloop()
 
 def main():
-  if sys.len(sys.argv) < 2:
+  if len(sys.argv) < 2:
     print("Too few arguments")
+    return 
 
   with open(sys.argv[1]) as input:
     with open("template.html") as template_file:
       template = template_file.read()
       markdown = input.read()
       input.close()
-      html = template.replace('{{content}}', parse_text(markdown))
+      html = template.replace('{{content}}', parse_text(markdown)).replace('{{title}}', sys.argv[1].split('/')[-1])
 
       if len(sys.argv) > 2:
         save_html(html, sys.argv[2])
