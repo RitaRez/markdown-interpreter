@@ -1,15 +1,20 @@
 import sys
 
 from flask import *
+from flask_cors import CORS, cross_origin
 from  src.lexinterpreter import parse_text
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
+@cross_origin()
 def index():
-  return "Hello, World!"
+  return "Hello, World!!!"
 
 @app.route('/convert/', methods=['POST'])
+@cross_origin()
 def convert():
 
   markdown = request.json['markdown']
