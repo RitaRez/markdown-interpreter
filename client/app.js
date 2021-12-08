@@ -1,4 +1,4 @@
-const api_endpoint = 'https://markdown-interpreter.herokuapp.com/convert/';
+const api_endpoint = 'https://markdown-interpreter-api.herokuapp.com/convert/';
 const request_delay = 1000;
 var timeout;
 
