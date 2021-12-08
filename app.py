@@ -2,6 +2,9 @@ import sys
 
 from flask import *
 from flask_cors import CORS, cross_origin
+
+
+sys.path.insert(1, './api')
 from  src.lexinterpreter import parse_text
 
 app = Flask(__name__)
