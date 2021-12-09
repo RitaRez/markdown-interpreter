@@ -46,13 +46,6 @@ jobs:
       - name: Run tests with unittest and gather coverage data
         run:  cd api && coverage run -m unittest discover
           
-      - name: geckodriver/firefox
-        run: |
-          echo "geckodriver/firefox"
-          which geckodriver
-          geckodriver --version
-          which firefox
-          firefox --version
       - name: Test selenium
         run: |
           cd e2e && coverage run -m unittest
