@@ -42,7 +42,7 @@ jobs:
         
       - name: Run tests with unittest and gather coverage data
         run: |
-          cd api && coverage run -m --omit=./tests/test_lexinterpreter.py,./tests/* unittest discover
+          cd api && coverage run -m --omit=./tests/* unittest discover
           coverage report
           coverage xml
           
