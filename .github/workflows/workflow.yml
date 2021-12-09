@@ -49,7 +49,7 @@ jobs:
           firefox --version
       - name: Test selenium
         run: |
-          cd ../e2e && coverage run -m unittest
+          cd e2e && coverage run -m unittest
           coverage xml
           
       - name: "Upload coverage to Codecov"
