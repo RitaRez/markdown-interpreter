@@ -20,3 +20,5 @@ tk==0.1.0
 tkinterhtml==0.7
 toml==0.10.2
 urllib3==1.26.7
+selenium==4.1.0
+beautifulsoup4==4.10.0
