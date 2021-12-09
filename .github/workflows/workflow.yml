@@ -52,7 +52,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           root_dir: ./api
           flags: unittests # optional
-          verbose: true # optional (default = false)
           fail_ci_if_error: true
           
 
