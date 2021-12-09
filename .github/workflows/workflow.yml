@@ -51,7 +51,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           root_dir: ./api
-          files: htmlcov/index.xml 
+          files: coverage.xml 
           flags: unittests # optional
           fail_ci_if_error: true
           
