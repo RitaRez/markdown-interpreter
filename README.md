@@ -1,6 +1,6 @@
 # Markdown Interpreter
 
-A simple _markdown_ interpreter made with python 3, [Tkinter](https://docs.python.org/3/library/tkinter.html), [tkhtmlview](https://pypi.org/project/tkhtmlview/) and _a lot_ of regex. Hosted with [github pages](ritarez.github.io/markdown-interpreter/)
+A simple _markdown_ interpreter made with python 3, [Tkinter](https://docs.python.org/3/library/tkinter.html), [tkhtmlview](https://pypi.org/project/tkhtmlview/) and _a lot_ of regex. Hosted with [github pages](http://ritarez.github.io/markdown-interpreter/)
 
 Contributors
 ------------
@@ -24,4 +24,4 @@ Run the file _olf_main.py_ passing as argument the path to a markdown file, and 
 
 ```python3 main.py markdown-file.md```
 
-You can also use the [hosted](ritarez.github.io/markdown-interpreter/) version with a simple interface, write your markdown on the text area click on preview and watch as the magic happens :)
+You can also use the [hosted](http://ritarez.github.io/markdown-interpreter/) version with a simple interface, write your markdown on the text area click on preview and watch as the magic happens :)
