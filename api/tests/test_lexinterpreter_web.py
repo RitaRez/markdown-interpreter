@@ -1,4 +1,5 @@
 import unittest, time
+import os
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -6,10 +7,16 @@ from selenium.webdriver.common.by import By
 
 from bs4 import BeautifulSoup
 
+is_action_environment = False
+try:
+  is_action_environment = os.environ['GITHUB_ACTIONS']
+except:
+  is_action_environment = False
+
 class AcceptanceTest(unittest.TestCase):
   def setUp(self):
     options = webdriver.FirefoxOptions()
-    options.headless = True
+    options.headless = True if is_action_environment else False
     self.driver = webdriver.Firefox(options=options)
     self.driver.get("https://ritarez.github.io/markdown-interpreter/")
 
