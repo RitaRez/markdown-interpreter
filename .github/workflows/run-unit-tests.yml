@@ -1,4 +1,4 @@
-name: Run Python Tests
+name: Run API Unit Tests
 
 # Controls when the workflow will run
 on:
@@ -10,12 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  unit-test:
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v2
@@ -31,18 +31,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          if [ "$RUNNER_OS" == "Linux" ]; then
-              sudo apt install firefox-geckodriver
-          elif [ "$RUNNER_OS" == "macOS" ]; then
-              brew install geckodriver
-          else
-              echo "$RUNNER_OS not supported"
-              exit 1
-          fi
         
-      - name: Run tests with unittest and gather coverage data
+      - name: Run unit tests with unittest and gather coverage data
         run: |
-          cd api && coverage run -m --omit=./tests/* unittest discover
+          cd api && coverage run -m --omit=./tests/* unittest discover tests/
           coverage report
           coverage xml
           
